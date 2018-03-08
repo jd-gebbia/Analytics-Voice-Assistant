@@ -47,9 +47,9 @@ function processV2Request (request, response) {
           //data: richResponsesV1, // Optional, uncomment to enable
           //outputContexts: [{'name': 'weather', 'lifespan': 2, 'parameters': {'city': 'Rome'}}], // Optional, uncomment to enablee
           
-          text: 'Successfully received fulfillment response to://' // displayed response
+          fulfillmentText: 'Successfully received fulfillment response to://' // displayed response
         };
-        sendResponse(text);
+        sendResponse(fulfillmentText);
     },
       // Default handler for unknown or undefined actions
       'default': () => {
