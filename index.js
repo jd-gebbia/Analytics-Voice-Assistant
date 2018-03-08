@@ -64,7 +64,8 @@ function processV2Request (request, response) {
           //data: richResponsesV1, // Optional, uncomment to enable
           //outputContexts: [{'name': 'weather', 'lifespan': 2, 'parameters': {'city': 'Rome'}}], // Optional, uncomment to enablee
           
-          fulfillmentText: 'Successfully received fulfillment response to://' // displayed response
+          speech: 'Successfully received fulfillment response to://', // displayed response
+          displayText: 'Successfully received fulfillment response to://' // displayed response
         };
         sendResponse(responseToUser);
     },
@@ -73,7 +74,8 @@ function processV2Request (request, response) {
         let responseToUser = {
           //fulfillmentMessages: richResponsesV2, // Optional, uncomment to enable
           //outputContexts: [{ 'name': `${session}/contexts/weather`, 'lifespanCount': 2, 'parameters': {'city': 'Rome'} }], // Optional, uncomment to enable
-          fulfillmentText: 'This is from Dialogflow\'s Cloud Functions for Firebase editor! :-)' // displayed response
+          speech: 'This is from Dialogflow\'s Cloud Functions for Firebase editor! :-)', // displayed response
+          displayText: 'This is from Dialogflow\'s Cloud Functions for Firebase editor! :-)' // displayed response
         };
         sendResponse(responseToUser);
       }
