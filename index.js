@@ -19,15 +19,28 @@ server.post('/', function (req, res) {
         source: '/'
       });
     }
-    else{
+    else if(action=="echo"){
       return res.json({
         speech: req.body.result.action,
-        displayText: "this is not the default action",
-        source: 'get-movie-details',
+        displayText: "this is the echo action",
+        source: '/',
         messages: [
           {
             type: 0,
-            speech: "This worked correctly"
+            speech: "You sent "+req.body.result.resolvedQuery+" from "+req.body.result.source
+          }
+        ]
+      });
+    }
+    else{
+      return res.json({
+        speech: req.body.result.action,
+        displayText: "Unknown Action",
+        source: '/',
+        messages: [
+          {
+            type: 0,
+            speech: "Im sorry I cant quite tell what you mean for me to do"
           }
         ]
       });
