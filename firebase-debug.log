@@ -1,0 +1,253 @@
+[debug] [2018-03-08T02:12:17.533Z] ----------------------------------------------------------------------
+[debug] [2018-03-08T02:12:17.537Z] Command:       /usr/bin/node /usr/local/bin/firebase init
+[debug] [2018-03-08T02:12:17.537Z] CLI Version:   3.17.5
+[debug] [2018-03-08T02:12:17.537Z] Platform:      linux
+[debug] [2018-03-08T02:12:17.537Z] Node Version:  v6.13.1
+[debug] [2018-03-08T02:12:17.538Z] Time:          Wed Mar 07 2018 21:12:17 GMT-0500 (STD)
+[debug] [2018-03-08T02:12:17.538Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-03-08T02:12:17.555Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2018-03-08T02:12:17.556Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /mnt/c/Users/gebbij2/Dropbox/RCOS_AVA/AVA_repo/Analytics-Voice-Assistant
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2018-03-08T02:12:21.188Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-03-08T02:12:21.188Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/Ted0BT0pjERV1OpQ6OCYJEaw4bJOrEjM8LK0cvOKQZgDMc-9Vkep_chsM1wAlVVn',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Wed Mar 07 2018 21:12:21 GMT-0500 (STD)
+[debug] [2018-03-08T02:12:21.414Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-08T02:12:21.453Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects  
+  
+ Wed Mar 07 2018 21:12:21 GMT-0500 (STD)
+[debug] [2018-03-08T02:12:22.167Z] <<< HTTP RESPONSE 200
+[info] i  .firebaserc already has a default project, skipping
+[info] 
+=== Database Setup
+[info] 
+[info] Firebase Realtime Database Rules allow you to define how your data should be
+[info] structured and when your data can be read from and written to.
+[info] 
+[info] Skipping overwrite of Database Rules.
+[info] The rules defined in database.rules.json will be published when you do firebase deploy.
+[info] 
+=== Firestore Setup
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[info] 
+[info] Firestore indexes allow you to perform complex queries while
+[info] maintaining performance that scales with the size of the result
+[info] set. You can keep index definitions in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[info] 
+=== Functions Setup
+[info] 
+[info] A functions directory will be created in your project with a Node.js
+[info] package pre-configured. Functions can be deployed with firebase deploy.
+[info] 
+[debug] [2018-03-08T02:12:36.656Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-03-08T02:12:36.657Z] > authorizing via signed-in user
+[debug] [2018-03-08T02:12:36.657Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-03-08T02:12:36.657Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/Ted0BT0pjERV1OpQ6OCYJEaw4bJOrEjM8LK0cvOKQZgDMc-9Vkep_chsM1wAlVVn',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Wed Mar 07 2018 21:12:36 GMT-0500 (STD)
+[debug] [2018-03-08T02:12:36.745Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-08T02:12:36.759Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/my-weather-23327  
+  
+ Wed Mar 07 2018 21:12:36 GMT-0500 (STD)
+[debug] [2018-03-08T02:12:37.026Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-08T02:12:37.027Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/my-weather-23327/tokens  
+  
+ Wed Mar 07 2018 21:12:37 GMT-0500 (STD)
+[debug] [2018-03-08T02:12:37.380Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-08T02:12:37.437Z] >>> HTTP REQUEST PATCH https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/my-weather-23327?updateMask=usageSettings  
+ { usageSettings: { consumerEnableStatus: 'ENABLED' } } 
+ Wed Mar 07 2018 21:12:37 GMT-0500 (STD)
+[debug] [2018-03-08T02:12:37.441Z] >>> HTTP REQUEST PATCH https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/my-weather-23327?updateMask=usageSettings  
+ { usageSettings: { consumerEnableStatus: 'ENABLED' } } 
+ Wed Mar 07 2018 21:12:37 GMT-0500 (STD)
+[debug] [2018-03-08T02:12:40.242Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-08T02:12:40.245Z] <<< HTTP RESPONSE 200
+[info] ✔  Wrote functions/package.json
+[info] ✔  Wrote functions/.eslintrc.json
+[info] ✔  Wrote functions/index.js
+[info] 
+[error] NPM install failed, continuing with Firebase initialization...
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2018-03-08T02:16:00.564Z] Error: EINVAL: invalid argument, mkdir '/mnt/c/Users/gebbij2/Dropbox/RCOS_AVA/AVA_repo/Analytics-Voice-Assistant/C:\Users\gebbij2\Dropbox\RCOS_AVA\AVA_repo\Analytics-Voice-Assistant'
+    at Error (native)
+    at Object.fs.mkdirSync (fs.js:932:18)
+    at Object.mkdirsSync (/usr/local/lib/node_modules/firebase-tools/node_modules/fs-extra/lib/mkdirs/mkdirs-sync.js:22:9)
+    at Object.createFileSync (/usr/local/lib/node_modules/firebase-tools/node_modules/fs-extra/lib/ensure/file.js:31:11)
+    at Config.writeProjectFile (/usr/local/lib/node_modules/firebase-tools/lib/config.js:169:6)
+    at /usr/local/lib/node_modules/firebase-tools/lib/config.js:189:12
+    at tryCatch (/usr/local/lib/node_modules/firebase-tools/node_modules/rsvp/dist/rsvp.js:525:12)
+    at invokeCallback (/usr/local/lib/node_modules/firebase-tools/node_modules/rsvp/dist/rsvp.js:538:13)
+    at /usr/local/lib/node_modules/firebase-tools/node_modules/rsvp/dist/rsvp.js:606:14
+    at flush (/usr/local/lib/node_modules/firebase-tools/node_modules/rsvp/dist/rsvp.js:2415:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2018-03-08T02:16:16.365Z] ----------------------------------------------------------------------
+[debug] [2018-03-08T02:16:16.370Z] Command:       /usr/bin/node /usr/local/bin/firebase init
+[debug] [2018-03-08T02:16:16.370Z] CLI Version:   3.17.5
+[debug] [2018-03-08T02:16:16.371Z] Platform:      linux
+[debug] [2018-03-08T02:16:16.371Z] Node Version:  v6.13.1
+[debug] [2018-03-08T02:16:16.371Z] Time:          Wed Mar 07 2018 21:16:16 GMT-0500 (STD)
+[debug] [2018-03-08T02:16:16.371Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-03-08T02:16:16.390Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2018-03-08T02:16:16.391Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /mnt/c/Users/gebbij2/Dropbox/RCOS_AVA/AVA_repo/Analytics-Voice-Assistant
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2018-03-08T02:16:20.363Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-03-08T02:16:20.364Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/Ted0BT0pjERV1OpQ6OCYJEaw4bJOrEjM8LK0cvOKQZgDMc-9Vkep_chsM1wAlVVn',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Wed Mar 07 2018 21:16:20 GMT-0500 (STD)
+[debug] [2018-03-08T02:16:20.572Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-08T02:16:20.599Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects  
+  
+ Wed Mar 07 2018 21:16:20 GMT-0500 (STD)
+[debug] [2018-03-08T02:16:21.346Z] <<< HTTP RESPONSE 200
+[info] i  .firebaserc already has a default project, skipping
+[info] 
+=== Database Setup
+[info] 
+[info] Firebase Realtime Database Rules allow you to define how your data should be
+[info] structured and when your data can be read from and written to.
+[info] 
+[info] ✔  Database Rules for undefined have been downloaded to database.rules.json.
+[info] Future modifications to database.rules.json will update Database Rules when you run
+[info] firebase deploy.
+[info] 
+=== Firestore Setup
+[info] 
+[info] Firestore Security Rules allow you to define how and when to allow
+[info] requests. You can keep these rules in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[info] 
+[info] Firestore indexes allow you to perform complex queries while
+[info] maintaining performance that scales with the size of the result
+[info] set. You can keep index definitions in your project directory
+[info] and publish them with firebase deploy.
+[info] 
+[info] 
+=== Functions Setup
+[info] 
+[info] A functions directory will be created in your project with a Node.js
+[info] package pre-configured. Functions can be deployed with firebase deploy.
+[info] 
+[debug] [2018-03-08T02:16:29.626Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-03-08T02:16:29.627Z] > authorizing via signed-in user
+[debug] [2018-03-08T02:16:29.628Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-03-08T02:16:29.628Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/Ted0BT0pjERV1OpQ6OCYJEaw4bJOrEjM8LK0cvOKQZgDMc-9Vkep_chsM1wAlVVn',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Wed Mar 07 2018 21:16:29 GMT-0500 (STD)
+[debug] [2018-03-08T02:16:29.750Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-08T02:16:29.773Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/my-weather-23327  
+  
+ Wed Mar 07 2018 21:16:29 GMT-0500 (STD)
+[debug] [2018-03-08T02:16:30.026Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-08T02:16:30.026Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/my-weather-23327/tokens  
+  
+ Wed Mar 07 2018 21:16:30 GMT-0500 (STD)
+[debug] [2018-03-08T02:16:30.320Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-08T02:16:30.337Z] >>> HTTP REQUEST PATCH https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/my-weather-23327?updateMask=usageSettings  
+ { usageSettings: { consumerEnableStatus: 'ENABLED' } } 
+ Wed Mar 07 2018 21:16:30 GMT-0500 (STD)
+[debug] [2018-03-08T02:16:30.343Z] >>> HTTP REQUEST PATCH https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/my-weather-23327?updateMask=usageSettings  
+ { usageSettings: { consumerEnableStatus: 'ENABLED' } } 
+ Wed Mar 07 2018 21:16:30 GMT-0500 (STD)
+[debug] [2018-03-08T02:16:33.190Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-08T02:16:33.199Z] <<< HTTP RESPONSE 200
+[info] ✔  Wrote functions/package.json
+[info] ✔  Wrote functions/.eslintrc.json
+[info] ✔  Wrote functions/index.js
+[info] 
+[error] NPM install failed, continuing with Firebase initialization...
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2018-03-08T02:19:46.983Z] Error: EINVAL: invalid argument, mkdir '/mnt/c/Users/gebbij2/Dropbox/RCOS_AVA/AVA_repo/Analytics-Voice-Assistant/C:'
+    at Error (native)
+    at Object.fs.mkdirSync (fs.js:932:18)
+    at mkdirsSync (/usr/local/lib/node_modules/firebase-tools/node_modules/fs-extra/lib/mkdirs/mkdirs-sync.js:22:9)
+    at mkdirsSync (/usr/local/lib/node_modules/firebase-tools/node_modules/fs-extra/lib/mkdirs/mkdirs-sync.js:27:16)
+    at mkdirsSync (/usr/local/lib/node_modules/firebase-tools/node_modules/fs-extra/lib/mkdirs/mkdirs-sync.js:27:16)
+    at mkdirsSync (/usr/local/lib/node_modules/firebase-tools/node_modules/fs-extra/lib/mkdirs/mkdirs-sync.js:27:16)
+    at mkdirsSync (/usr/local/lib/node_modules/firebase-tools/node_modules/fs-extra/lib/mkdirs/mkdirs-sync.js:27:16)
+    at Object.mkdirsSync (/usr/local/lib/node_modules/firebase-tools/node_modules/fs-extra/lib/mkdirs/mkdirs-sync.js:27:16)
+    at Object.createFileSync (/usr/local/lib/node_modules/firebase-tools/node_modules/fs-extra/lib/ensure/file.js:31:11)
+    at Config.writeProjectFile (/usr/local/lib/node_modules/firebase-tools/lib/config.js:169:6)
+[error] 
+[error] Error: An unexpected error has occurred.
