@@ -8,7 +8,7 @@ Must install Node CLI and Firebase CLI
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
-const http = require('http');
+const http = require('https');
 //requiring module dependencies
 
 const server = express();
@@ -25,7 +25,7 @@ server.post('/make-request', function (req, res) {
         source:  '/make-request'
     });
 });
-server.post('/test_fulfillment', function (req, res) {
+server.post('/test-fulfillment', function (req, res) {
     return res.json({
         speech: 'tested that fulfillment',
         displayText: 'Received fulfillment test in webhook',

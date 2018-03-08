@@ -1,0 +1,6 @@
+{
+  "name": "Analytics-Voice-Assisnt",
+  "description": "webhook for AVA chatbot",
+  "repository": "https://github.com/gfvandehei/Analytics-Voice-Assistant",
+  "keywords": ["node", "express", "static"]
+}
