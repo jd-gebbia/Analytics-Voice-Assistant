@@ -22,14 +22,14 @@ server.post('/make-request', function (req, res) {
     return res.json({
         speech: 'this is a test',
         displayText: 'Test has been completed if you see this',
-        source:  '/make-request'
+        source:  'analytics-vocie-assistant'
     });
 });
 server.post('/test-fulfillment', function (req, res) {
     return res.json({
         speech: 'tested that fulfillment',
         displayText: 'Received fulfillment test in webhook',
-        source: '/analytics-voice-assistant'
+        source: 'analytics-voice-assistant'
     });
 });
 //define a route on the server.js
