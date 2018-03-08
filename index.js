@@ -83,6 +83,7 @@ function processV1Request (request, response) {
     }
   
     // Run the proper handler function to handle the request from Dialogflow
+    console.log(action);
     actionHandlers[action]();
 
     function sendResponse (responseToUser) {
