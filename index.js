@@ -25,7 +25,7 @@ server.post('/make-request', function (req, res) {
         source:  'analytics-vocie-assistant'
     });
 });
-server.post('/test-fulfillment', function (req, res) {
+server.post('input.test_fulfillment', function (req, res) {
     return res.json({
         speech: 'tested that fulfillment',
         displayText: 'Received fulfillment test in webhook',
