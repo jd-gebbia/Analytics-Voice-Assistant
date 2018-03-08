@@ -66,7 +66,7 @@ function processV2Request (request, response) {
           
           fulfillmentText: 'Successfully received fulfillment response to://' // displayed response
         };
-        sendResponse(fulfillmentText);
+        sendResponse(responseToUser);
     },
       // Default handler for unknown or undefined actions
       'default': () => {
