@@ -11,6 +11,23 @@ const bodyParser = require('body-parser');
 const http = require('https');
 //requiring module dependencies
 
+const functions = require('firebase-functions'); // Cloud Functions for Firebase library
+const DialogflowApp = require('actions-on-google').DialogflowApp; // Google Assistant helper library
+
+exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
+  console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
+  console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
+
+  if (request.body.result) {
+    processV1Request(request, response);
+  } else if (request.body.queryResult) {
+    processV2Request(request, response);
+  } else {
+    console.log('Invalid Request');
+    return response.status(400).end('Invalid Webhook Request (expecting v1 or v2 webhook request)');
+  }
+});
+
 const server = express();
 server.use(bodyParser.urlencoded({
     extended: true
