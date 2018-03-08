@@ -13,7 +13,7 @@ server.use(bodyParser.urlencoded({
     extended: true
 }));
 server.use(bodyParser.json());
-//create server and define arsing srategies
+//create server and define parsing srategies
 
 server.post('/make-request', function (req, res) {
     return res.json({
@@ -22,7 +22,15 @@ server.post('/make-request', function (req, res) {
         source: '/make-request'
     });
 });
+server.post('/test_fulfillment', function (req, res) {
+    return res.json({
+        speech: 'tested that fulfillment',
+        displayText: 'Received fulfillment test in webhook',
+        source: '/analytics-voice-assistant'
+    });
+});
 //define a route on the server.js
+
 
 server.listen((process.env.PORT || 8000), function () {
     console.log("Server is running...");
