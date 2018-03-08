@@ -23,7 +23,13 @@ server.post('/', function (req, res) {
       return res.json({
         speech: req.body.result.action,
         displayText: "this is not the default action",
-        source: 'get-movie-details'
+        source: 'get-movie-details',
+        messages: [
+          {
+            type: 0,
+            speech: "This worked correctly"
+          }
+        ]
       });
     }
 
