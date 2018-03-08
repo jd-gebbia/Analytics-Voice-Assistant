@@ -24,12 +24,12 @@ server.post('/', function (req, res) {
         speech: req.body.result.action,
         displayText: "this is not the default action",
         source: 'get-movie-details',
-        messages: [
+        /*messages: [
           {
-            type: 0,
+            type: 1,
             speech: "This worked correctly"
           }
-        ]
+        ]*/
       });
     }
 
