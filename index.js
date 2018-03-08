@@ -65,7 +65,19 @@ function processV2Request (request, response) {
           //outputContexts: [{'name': 'weather', 'lifespan': 2, 'parameters': {'city': 'Rome'}}], // Optional, uncomment to enablee
           
           speech: 'Successfully received fulfillment response to://', // displayed response
-          displayText: 'Successfully received fulfillment response to://' // displayed response
+          displayText: 'Successfully received fulfillment response to://', // displayed response
+          data:{
+            google:{
+                expect_user_response: false,
+                final_response: {
+                    speech_response: {
+                    text_to_speech: "received webhook response"
+                    }
+                }
+            }
+        },
+        contextOut:[],
+        source:"webhook"
         };
         sendResponse(responseToUser);
     },
