@@ -26,7 +26,7 @@ server.post('/', function (req, res) {
         source: 'get-movie-details',
         messages: [
           {
-            type: 1,
+            type: 0,
             speech: "This worked correctly"
           }
         ]
