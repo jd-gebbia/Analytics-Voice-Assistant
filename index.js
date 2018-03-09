@@ -1,13 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
+const firebase=require('firebase');
 
 const server = express();
 server.use(bodyParser.urlencoded({
     extended: true
 }));
-
 server.use(bodyParser.json());
+
+firebase.initializeApp({
+  "serviceAccount": "./service-account.json",
+  "databaseURL": "https://my-weather-23327.firebaseio.com/",
+});
 
 server.post('/', function (req, res) {
 
@@ -32,6 +37,9 @@ server.post('/', function (req, res) {
         ]
       });
     }
+    /*else if(action=="GetField"){
+      //let field=req.body.
+    }*/
     else{
       return res.json({
         speech: req.body.result.action,
@@ -46,6 +54,11 @@ server.post('/', function (req, res) {
       });
     }
 
+  });
+
+  var ref=firebase.app().database().ref();
+  ref.once('value').then(function(snap){
+    console.log('snap.val()',snap.val());
   });
 
 server.listen((process.env.PORT || 8000), function () {
