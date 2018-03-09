@@ -50,7 +50,20 @@ server.post('/', function (req, res) {
         messages: [
           {
             type: 0,
-            speech: data
+            speech: data.JD
+          }
+        ]
+      });
+    }
+    else{
+      return res.json({
+        speech: req.body.result.action,
+        displayText: "default action",
+        source: '/',
+        messages: [
+          {
+            type: 0,
+            speech: "default"
           }
         ]
       });
