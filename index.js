@@ -40,15 +40,17 @@ server.post('/', function (req, res) {
     /*else if(action=="GetField"){
       //let field=req.body.
     }*/
-    else{
+    else if(action=="GetTableData"){
+      var table = req.body.result.parameters;
+      var data = snap.val();
       return res.json({
-        speech: req.body.result.action,
-        displayText: "Unknown Action",
+        speech: "this is the table",
+        displayText: "Get Table Data",
         source: '/',
         messages: [
           {
             type: 0,
-            speech: "Im sorry I cant quite tell what you mean for me to do"
+            speech: data
           }
         ]
       });
