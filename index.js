@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
-const firebase=require('firebase');
+const firebase = require('firebase');
 
 const server = express();
 server.use(bodyParser.urlencoded({
@@ -37,9 +37,29 @@ server.post('/', function (req, res) {
         ]
       });
     }
-    /*else if(action=="GetField"){
-      //let field=req.body.
-    }*/
+    else if(action=="get_Address"){
+      var name = req.body.result.paramaterts.name;
+      var ref = firebase.app().database().ref();
+      var address;
+      ref.once('value', function(snap){
+        snap.child('address', function(childsnap){
+          address = childsnap.val();
+        });
+      });
+      return res.json({
+        speech: req.body.result.action,
+        displayText: "this is the get_Address action",
+        source: '/',
+        messages: [
+          {
+            type: 0,
+            speech: req.body.result.paramaterts.name+"'s address is"+address
+          }
+        ]
+      });
+    }
+
+
     else{
       return res.json({
         speech: req.body.result.action,
@@ -48,7 +68,7 @@ server.post('/', function (req, res) {
         messages: [
           {
             type: 0,
-            speech: "Im sorry I cant quite tell what you mean for me to do"
+            speech: "Sorry I don't know that action"
           }
         ]
       });
