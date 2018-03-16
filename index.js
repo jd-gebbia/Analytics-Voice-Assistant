@@ -39,8 +39,9 @@ server.post('/', function (req, res) {
     }
     else if(action=="get_Address"){
       var name = req.body.result.paramaterts.name;
-      var ref = firebase.app().database().ref();
-      var address;
+      var ref = firebase.database().ref();
+      var address = '';
+
       ref.once('value', function(snap){
         snap.child('Address', function(childsnap){
           address = childsnap.val();
