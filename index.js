@@ -39,14 +39,17 @@ server.post('/', function (req, res) {
     }
     else if(action=="get_Address"){
       var name = req.body.result.paramaterts.name;
-      var ref = firebase.database().ref();
-      var address = '';
+      var loc = "my-weather-23327/"+name;
+      var ref = firebase.database().ref(loc);
 
-      ref.once('value', function(snap){
-        snap.child('Address', function(childsnap){
-          address = childsnap.val();
-        });
+      ref.once('value').then(function(snapshot){
+        var address = snapshot.child(name='/Address').val();
       });
+      // ref.once('value', function(snap){
+      //   snap.child('Address', function(childsnap){
+      //     address = childsnap.val();
+      //   });
+      // });
       return res.json({
         speech: req.body.result.action,
         displayText: "this is the get_Address action",
@@ -54,7 +57,7 @@ server.post('/', function (req, res) {
         messages: [
           {
             type: 0,
-            speech: req.body.result.paramaterts.name+"'s address is"+address
+            speech: name+"'s address is"+address
           }
         ]
       });
