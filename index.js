@@ -39,12 +39,11 @@ server.post('/', function (req, res) {
     }
     else if(action=="get_Address"){
       var name = req.body.result.parameters.name;
-      var loc = "my-weather-23327/"+name;
-      var ref = firebase.app().database().ref(loc);
-      global.address = "*couldn't get an address";
+      var ref = firebase.app().database().ref();
+      address = "*couldn't get an address";
 
-      ref.once('value').then(function(snapshot){
-        address = snapshot.child(name).child('Address').val();
+      ref.once('value').then(function(snap){
+        address = snap.child(name).child('Address').val();
       });
 
       return res.json({
@@ -80,6 +79,10 @@ server.post('/', function (req, res) {
   var ref=firebase.app().database().ref();
   ref.once('value').then(function(snap){
     console.log('snap.val()',snap.val());
+  });
+
+  ref.once('value').then(function(snap){
+    console.log("Address:", snap.child("Alan Turing").child('Address').val());
   });
 
 server.listen((process.env.PORT || 8000), function () {
