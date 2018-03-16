@@ -40,7 +40,7 @@ server.post('/', function (req, res) {
     else if(action=="get_Address"){
       var name = req.body.result.paramaterts.name;
       var loc = "my-weather-23327/"+name;
-      var ref = firebase.database().ref(loc);
+      var ref = firebase.app().database().ref(loc);
       var address = "*couldn't get an address";
 
       ref.once('value').then(function(snapshot){
