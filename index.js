@@ -40,10 +40,10 @@ server.post('/', function (req, res) {
     else if(action=="get_Address"){
       var name = req.body.result.parameters.name;
       var ref = firebase.app().database().ref();
-      // var address = "*couldn't get an address";
+      global.address = "*couldn't get an address";
 
       ref.once('value').then(function(snap){
-        var address = snap.child(name).child('Address').val();
+        global.address = snap.child(name).child('Address').val();
       });
 
       return res.json({
@@ -53,7 +53,7 @@ server.post('/', function (req, res) {
         messages: [
           {
             type: 0,
-            speech: name+"'s address is "+address
+            speech: name+"'s address is "+global.address
           }
         ]
       });
