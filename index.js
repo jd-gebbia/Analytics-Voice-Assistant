@@ -41,9 +41,10 @@ server.post('/', function (req, res) {
       var name = req.body.result.paramaterts.name;
       var loc = "my-weather-23327/"+name;
       var ref = firebase.database().ref(loc);
+      var address = "*couldn't get an address";
 
       ref.once('value').then(function(snapshot){
-        var address = snapshot.child(name='/Address').val();
+        address = snapshot.child(name+'/Address').val();
       });
       // ref.once('value', function(snap){
       //   snap.child('Address', function(childsnap){
@@ -57,7 +58,7 @@ server.post('/', function (req, res) {
         messages: [
           {
             type: 0,
-            speech: name+"'s address is"+address
+            speech: name+"'s address is "+address
           }
         ]
       });
