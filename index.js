@@ -40,7 +40,7 @@ server.post('/', function (req, res) {
     else if(action=="get_Address"){
       var name = req.body.result.parameters.name;
       var ref = firebase.app().database().ref();
-      var address = "*couldn't get an address";
+      global.address = "*couldn't get an address";
 
       ref.once('value').then(function(snap){
         address = snap.child(name).child('Address').val();
