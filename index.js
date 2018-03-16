@@ -41,10 +41,10 @@ server.post('/', function (req, res) {
       var name = req.body.result.parameters.name;
       var loc = "my-weather-23327/"+name;
       var ref = firebase.app().database().ref(loc);
-      // var address = "*couldn't get an address";
+      global.address = "*couldn't get an address";
 
       ref.once('value').then(function(snapshot){
-        var address = snapshot.child(name+'/Address').val();
+        address = snapshot.child(name).child('Address').val();
       });
 
       return res.json({
