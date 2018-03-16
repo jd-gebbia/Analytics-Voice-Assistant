@@ -38,7 +38,7 @@ server.post('/', function (req, res) {
       });
     }
     else if(action=="get_Address"){
-      var name = req.body.result.paramaterts.name;
+      var name = req.body.result.parameters.name;
       var loc = "my-weather-23327/"+name;
       var ref = firebase.app().database().ref(loc);
       var address = "*couldn't get an address";
@@ -46,7 +46,7 @@ server.post('/', function (req, res) {
       // ref.once('value').then(function(snapshot){
       //   address = snapshot.child(name+'/Address').val();
       // });
-      
+
       // ref.once('value', function(snap){
       //   snap.child('Address', function(childsnap){
       //     address = childsnap.val();
