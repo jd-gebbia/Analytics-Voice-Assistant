@@ -43,9 +43,10 @@ server.post('/', function (req, res) {
       var ref = firebase.app().database().ref(loc);
       var address = "*couldn't get an address";
 
-      ref.once('value').then(function(snapshot){
-        address = snapshot.child(name+'/Address').val();
-      });
+      // ref.once('value').then(function(snapshot){
+      //   address = snapshot.child(name+'/Address').val();
+      // });
+      
       // ref.once('value', function(snap){
       //   snap.child('Address', function(childsnap){
       //     address = childsnap.val();
