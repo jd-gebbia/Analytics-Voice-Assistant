@@ -44,19 +44,20 @@ server.post('/', function (req, res) {
 
       ref.once('value').then(function(snap){
         address = snap.child(name).child('Address').val();
+        return res.json({
+          speech: req.body.result.action,
+          displayText: "this is the get_Address action",
+          source: '/',
+          messages: [
+            {
+              type: 0,
+              speech: name+"'s address is "+address
+            }
+          ]
+        });
       });
 
-      return res.json({
-        speech: req.body.result.action,
-        displayText: "this is the get_Address action",
-        source: '/',
-        messages: [
-          {
-            type: 0,
-            speech: name+"'s address is "+address
-          }
-        ]
-      });
+     
     }
 
 
