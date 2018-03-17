@@ -56,11 +56,7 @@ server.post('/', function (req, res) {
           ]
         });
       });
-
-     
     }
-
-
     else{
       return res.json({
         speech: req.body.result.action,
