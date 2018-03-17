@@ -1,417 +1,89 @@
-/*
-Must install Node CLI and Firebase CLI
-*/
-
-'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
-//requiring module dependencies
+const firebase = require('firebase');
 
 const server = express();
 server.use(bodyParser.urlencoded({
     extended: true
 }));
 server.use(bodyParser.json());
-//create server and define arsing srategies
 
-// server.post('/make-request', function (req, res) {
-    
-//         let resuest_info = req.body.result && req.body.result.parameters &&
-//          req.body.result.parameters.movie ? req.body.result.parameters.movie : 'The Godfather';
-//         let reqUrl = encodeURI('http://theapache64.xyz:8080/movie_db/search?keyword=' + request_info);
-//         http.get(reqUrl, (responseFromAPI) => {
-    
-//             responseFromAPI.on('data', function (chunk) {
-//                 let movie = JSON.parse(chunk)['data'];
-//                 let dataToSend = movieToSearch === 'The Godfather' ? 'I don\'t have the required info on that. Here\'s some info on \'The Godfather\' instead.\n' : '';
-//                 dataToSend += movie.name + ' is a ' + movie.stars + ' starer ' + movie.genre + ' movie, released in ' + movie.year + '. It was directed by ' + movie.director;
-    
-//                 return res.json({
-//                     speech: dataToSend,
-//                     displayText: dataToSend,
-//                     source: 'make-request'
-//                 });
-//             });
-//         }, (error) => {
-//             return res.json({
-//                 speech: 'Something went wrong!',
-//                 displayText: 'Something went wrong!',
-//                 source: 'make-request'
-//             });
-//         });
-//     });
-//define a route on the server.js
-
-// server.listen((process.env.PORT || 8000), function () {
-//     console.log("Server is running...");
-// });
-//server running and listening to requests.js
-
-'use strict';
-
-// const functions = require('firebase-functions'); // Cloud Functions for Firebase library
-// const DialogflowApp = require('actions-on-google').DialogflowApp; // Google Assistant helper library
-
-exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
-  console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
-  console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
-  if (request.body.result) {
-    processV1Request(request, response);
-  } else if (request.body.queryResult) {
-    processV2Request(request, response);
-  } else {
-    console.log('Invalid Request');
-    return response.status(400).end('Invalid Webhook Request (expecting v1 or v2 webhook request)');
-  }
+firebase.initializeApp({
+  "serviceAccount": "./service-account.json",
+  "databaseURL": "https://my-weather-23327.firebaseio.com/",
 });
-/*
-* Function to handle v1 webhook requests from Dialogflow
-*/
 
-function processV1Request (request, response) {
-  let action = request.body.result.action; // https://dialogflow.com/docs/actions-and-parameters
-  let parameters = request.body.result.parameters; // https://dialogflow.com/docs/actions-and-parameters
-  let inputContexts = request.body.result.contexts; // https://dialogflow.com/docs/contexts
-  let requestSource = (request.body.originalRequest) ? request.body.originalRequest.source : undefined;
-  const googleAssistantRequest = 'google'; // Constant to identify Google Assistant requests
-  const app = new DialogflowApp({request: request, response: response});
-  // Create handlers for Dialogflow actions as well as a 'default' handler
-  const actionHandlers = {
-    // The default welcome intent has been matched, welcome the user (https://dialogflow.com/docs/events#default_welcome_intent)
-    'input.welcome': () => {
-      // Use the Actions on Google lib to respond to Google requests; for other requests use JSON
-      if (requestSource === googleAssistantRequest) {
-        sendGoogleResponse('Hello, Welcome to my Dialogflow agent!'); // Send simple response to user
-      } else {
-        sendResponse('Hello, Welcome to my Dialogflow agent!'); // Send simple response to user
-      }
-    },
-    // The default fallback intent has been matched, try to recover (https://dialogflow.com/docs/intents#fallback_intents)
-    'input.unknown': () => {
-      // Use the Actions on Google lib to respond to Google requests; for other requests use JSON
-      if (requestSource === googleAssistantRequest) {
-        sendGoogleResponse('I\'m having trouble, can you try that again?'); // Send simple response to user
-      } else {
-        sendResponse('I\'m having trouble, can you try that again?'); // Send simple response to user
-      }
-    },
-        'input.user_provides_table_name' : () => {
-        if (requestSource === googleAssistantRequest) { // This is not the source
-        let responseToUser = {
-          //googleRichResponse: googleRichResponse, // Optional, uncomment to enable
-          //googleOutputContexts: ['weather', 2, { ['city']: 'rome' }], // Optional, uncomment to enable
-          speech: 'how', // spoken response
-          text: 'how' // displayed response
-        };
-        sendResponse(responseToUser);
-        } else { // This is the source
-        // let tmp = request.body.originalRequest;
-        let responseToUser = { 
-          //data: richResponsesV1, // Optional, uncomment to enable
-          //outputContexts: [{'name': 'weather', 'lifespan': 2, 'parameters': {'city': 'Rome'}}], // Optional, uncomment to enable
-          
-          speech: '~~This should run a query lol~~', // spoken response
-          
-          text: '~~This should run a query lol~~', // displayed response
-        };
-        sendResponse(responseToUser);
-      }
-    },
-    //simple fulfillment test
-    'input.test_fulfillment' : () => {
-        if (requestSource === googleAssistantRequest) { // This is not the source
-        let responseToUser = {
-          //googleRichResponse: googleRichResponse, // Optional, uncomment to enable
-          //googleOutputContexts: ['weather', 2, { ['city']: 'rome' }], // Optional, uncomment to enable
-          speech: 'Successfully received fulfillment response', // spoken response
-          text: 'Successfully received fulfillment response' // displayed response
-        };
-        sendResponse(responseToUser);
-        } else { // This is the source
-        let tmp = request.body.originalRequest;
-        //************** use after deploying *****************
-        // const admin = require("firebase-admin");
-        // admin.initializeApp(functions.config().firebase);
-        //****************************************************
-        
-//         var db = admin.database();
-//         var ref = db.ref("https://my-weather-23327.firebaseio.com/");
-        
-//         // Attach an asynchronous callback to read the data at our posts reference
-//         ref.on("JD", function(snapshot) {
-//           console.log(snapshot.val());
-//         }, function (errorObject) {
-//           console.log("The read failed: " + errorObject.code);
-// });
-        
+server.post('/', function (req, res) {
 
-        // // Get a reference to the database service
-        // var database = admin.database();
-        // const preObject = document.getElementById("JD");
-        // const dbRefObject = admin.database().ref().child('JD');
-        // dbRefObject.on("value",snap => console.log(snap.val()));
-        
-        let responseToUser = { 
-          //data: richResponsesV1, // Optional, uncomment to enable
-          //outputContexts: [{'name': 'weather', 'lifespan': 2, 'parameters': {'city': 'Rome'}}], // Optional, uncomment to enable
-          
-          speech: 'Successfully received fulfillment response to://'+tmp, // spoken response
-          
-          text: 'Successfully received fulfillment response to://'+tmp, // displayed response
-        };
-        sendResponse(responseToUser);
-      }
-    },
-    // Default handler for unknown or undefined actions
-    'default': () => {
-      // Use the Actions on Google lib to respond to Google requests; for other requests use JSON
-      if (requestSource === googleAssistantRequest) {
-        let responseToUser = {
-          //googleRichResponse: googleRichResponse, // Optional, uncomment to enable
-          //googleOutputContexts: ['weather', 2, { ['city']: 'rome' }], // Optional, uncomment to enable
-          speech: 'This is the default message from Dialogflow\'s Cloud Functions for Firebase editor!', // spoken response
-          text: 'This is from Dialogflow\'s Cloud Functions for Firebase editor! :-)' // displayed response
-        };
-        sendGoogleResponse(responseToUser);
-      } else {
-        let responseToUser = {
-          //data: richResponsesV1, // Optional, uncomment to enable
-          //outputContexts: [{'name': 'weather', 'lifespan': 2, 'parameters': {'city': 'Rome'}}], // Optional, uncomment to enable
-          speech: 'This is the default message from Dialogflow\'s Cloud Functions for Firebase editor!', // spoken response
-          text: 'This is from Dialogflow\'s Cloud Functions for Firebase editor! :-)' // displayed response
-        };
-        sendResponse(responseToUser);
-      }
-    }
-  };
-  // If undefined or unknown action use the default handler
-  if (!actionHandlers[action]) {
-    action = 'default';
-  }
-  // Run the proper handler function to handle the request from Dialogflow
-  actionHandlers[action]();
-    // Function to send correctly formatted Google Assistant responses to Dialogflow which are then sent to the user
-  function sendGoogleResponse (responseToUser) {
-    if (typeof responseToUser === 'string') {
-      app.ask(responseToUser); // Google Assistant response
-    } else {
-      // If speech or displayText is defined use it to respond
-      let googleResponse = app.buildRichResponse().addSimpleResponse({
-        speech: responseToUser.speech || responseToUser.displayText,
-        displayText: responseToUser.displayText || responseToUser.speech
+    let action = req.body.result && req.body.result.action ? req.body.result.action: "default";
+    if(action=="default"){
+      return res.json({
+        speech: req.body.result.action,
+        displayText: "This is the default action",
+        source: '/'
       });
-      // Optional: Overwrite previous response with rich response
-      if (responseToUser.googleRichResponse) {
-        googleResponse = responseToUser.googleRichResponse;
-      }
-      // Optional: add contexts (https://dialogflow.com/docs/contexts)
-      if (responseToUser.googleOutputContexts) {
-        app.setContext(responseToUser.googleOutputContexts);
-      }
-      console.log('Response to Dialogflow (AoG): ' + JSON.stringify(googleResponse));
-      app.ask(googleResponse); // Send response to Dialogflow and Google Assistant
     }
-  }
-  // Function to send correctly formatted responses to Dialogflow which are then sent to the user
-  function sendResponse (responseToUser) {
-    // if the response is a string send it as a response to the user
-    if (typeof responseToUser === 'string') {
-      let responseJson = {};
-      responseJson.speech = responseToUser; // spoken response
-      responseJson.displayText = responseToUser; // displayed response
-      response.json(responseJson); // Send response to Dialogflow
-    } else {
-      // If the response to the user includes rich responses or contexts send them to Dialogflow
-      let responseJson = {};
-      // If speech or displayText is defined, use it to respond (if one isn't defined use the other's value)
-      responseJson.speech = responseToUser.speech || responseToUser.displayText;
-      responseJson.displayText = responseToUser.displayText || responseToUser.speech;
-      // Optional: add rich messages for integrations (https://dialogflow.com/docs/rich-messages)
-      responseJson.data = responseToUser.data;
-      // Optional: add contexts (https://dialogflow.com/docs/contexts)
-      responseJson.contextOut = responseToUser.outputContexts;
-      console.log('Response to Dialogflow: ' + JSON.stringify(responseJson));
-      response.json(responseJson); // Send response to Dialogflow
-    }
-  }
-}
-// Construct rich response for Google Assistant (v1 requests only)
-const app = new DialogflowApp();
-const googleRichResponse = app.buildRichResponse()
-  .addSimpleResponse('This is the first simple response for Google Assistant')
-  .addSuggestions(
-    ['Suggestion Chip', 'Another Suggestion Chip'])
-    // Create a basic card and add it to the rich response
-  .addBasicCard(app.buildBasicCard(`This is a basic card.  Text in a
- basic card can include "quotes" and most other unicode characters
- including emoji 📱.  Basic cards also support some markdown
- formatting like *emphasis* or _italics_, **strong** or __bold__,
- and ***bold itallic*** or ___strong emphasis___ as well as other things
- like line  \nbreaks`) // Note the two spaces before '\n' required for a
-                        // line break to be rendered in the card
-    .setSubtitle('This is a subtitle')
-    .setTitle('Title: this is a title')
-    .addButton('This is a button', 'https://assistant.google.com/')
-    .setImage('https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
-      'Image alternate text'))
-  .addSimpleResponse({ speech: 'This is another simple response',
-    displayText: 'This is the another simple response 💁' });
-// Rich responses for Slack and Facebook for v1 webhook requests
-const richResponsesV1 = {
-  'slack': {
-    'text': 'This is a text response for Slack.',
-    'attachments': [
-      {
-        'title': 'Title: this is a title',
-        'title_link': 'https://assistant.google.com/',
-        'text': 'This is an attachment.  Text in attachments can include \'quotes\' and most other unicode characters including emoji 📱.  Attachments also upport line\nbreaks.',
-        'image_url': 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
-        'fallback': 'This is a fallback.'
-      }
-    ]
-  },
-  'facebook': {
-    'attachment': {
-      'type': 'template',
-      'payload': {
-        'template_type': 'generic',
-        'elements': [
+    else if(action=="echo"){
+      return res.json({
+        speech: req.body.result.action,
+        displayText: "this is the echo action",
+        source: '/',
+        messages: [
           {
-            'title': 'Title: this is a title',
-            'image_url': 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
-            'subtitle': 'This is a subtitle',
-            'default_action': {
-              'type': 'web_url',
-              'url': 'https://assistant.google.com/'
-            },
-            'buttons': [
-              {
-                'type': 'web_url',
-                'url': 'https://assistant.google.com/',
-                'title': 'This is a button'
-              }
-            ]
+            type: 0,
+            speech: "You sent "+req.body.result.resolvedQuery+" from "+req.body.result.source
           }
         ]
-      }
+      });
     }
-  }
-};
-/*
-* Function to handle v2 webhook requests from Dialogflow
-*/
-function processV2Request (request, response) {
-  // An action is a string used to identify what needs to be done in fulfillment
-  let action = (request.body.queryResult.action) ? request.body.queryResult.action : 'default';
-  // Parameters are any entites that Dialogflow has extracted from the request.
-  let parameters = request.body.queryResult.parameters || {}; // https://dialogflow.com/docs/actions-and-parameters
-  // Contexts are objects used to track and store conversation state
-  let inputContexts = request.body.queryResult.contexts; // https://dialogflow.com/docs/contexts
-  // Get the request source (Google Assistant, Slack, API, etc)
-  let requestSource = (request.body.originalDetectIntentRequest) ? request.body.originalDetectIntentRequest.source : undefined;
-  // Get the session ID to differentiate calls from different users
-  let session = (request.body.session) ? request.body.session : undefined;
-  // Create handlers for Dialogflow actions as well as a 'default' handler
-  const actionHandlers = {
-    // The default welcome intent has been matched, welcome the user (https://dialogflow.com/docs/events#default_welcome_intent)
-    'input.welcome': () => {
-      sendResponse('Hello, Welcome to my Dialogflow agent!'); // Send simple response to user
-    },
-    // The default fallback intent has been matched, try to recover (https://dialogflow.com/docs/intents#fallback_intents)
-    'input.unknown': () => {
-      // Use the Actions on Google lib to respond to Google requests; for other requests use JSON
-      sendResponse('I\'m having trouble, can you try that again?'); // Send simple response to user
-    },
-    // Default handler for unknown or undefined actions
-    'default': () => {
-      let responseToUser = {
-        //fulfillmentMessages: richResponsesV2, // Optional, uncomment to enable
-        //outputContexts: [{ 'name': `${session}/contexts/weather`, 'lifespanCount': 2, 'parameters': {'city': 'Rome'} }], // Optional, uncomment to enable
-        fulfillmentText: 'This is from Dialogflow\'s Cloud Functions for Firebase editor! :-)' // displayed response
-      };
-      sendResponse(responseToUser);
+    else if(action=="get_Address"){
+      var name = req.body.result.parameters.name;
+      var ref = firebase.app().database().ref();
+      var address = "*couldn't get an address";
+
+      ref.once('value').then(function(snap){
+        address = snap.child(name).child('Address').val();
+        return res.json({
+          speech: req.body.result.action,
+          displayText: "this is the get_Address action",
+          source: '/',
+          messages: [
+            {
+              type: 0,
+              speech: name+"'s address is "+address
+            }
+          ]
+        });
+      });
     }
-  };
-  // If undefined or unknown action use the default handler
-  if (!actionHandlers[action]) {
-    action = 'default';
-  }
-  // Run the proper handler function to handle the request from Dialogflow
-  actionHandlers[action]();
-  // Function to send correctly formatted responses to Dialogflow which are then sent to the user
-  function sendResponse (responseToUser) {
-    // if the response is a string send it as a response to the user
-    if (typeof responseToUser === 'string') {
-      let responseJson = {fulfillmentText: responseToUser}; // displayed response
-      response.json(responseJson); // Send response to Dialogflow
-    } else {
-      // If the response to the user includes rich responses or contexts send them to Dialogflow
-      let responseJson = {};
-      // Define the text response
-      responseJson.fulfillmentText = responseToUser.fulfillmentText;
-      // Optional: add rich messages for integrations (https://dialogflow.com/docs/rich-messages)
-      if (responseToUser.fulfillmentMessages) {
-        responseJson.fulfillmentMessages = responseToUser.fulfillmentMessages;
-      }
-      // Optional: add contexts (https://dialogflow.com/docs/contexts)
-      if (responseToUser.outputContexts) {
-        responseJson.outputContexts = responseToUser.outputContexts;
-      }
-      // Send the response to Dialogflow
-      console.log('Response to Dialogflow: ' + JSON.stringify(responseJson));
-      response.json(responseJson);
-    }
-  }
-}
-const richResponseV2Card = {
-  'title': 'Title: this is a title',
-  'subtitle': 'This is an subtitle.  Text can include unicode characters including emoji 📱.',
-  'imageUri': 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
-  'buttons': [
-    {
-      'text': 'This is a button',
-      'postback': 'https://assistant.google.com/'
-    }
-  ]
-};
-const richResponsesV2 = [
-  {
-    'platform': 'ACTIONS_ON_GOOGLE',
-    'simple_responses': {
-      'simple_responses': [
-        {
-          'text_to_speech': 'Spoken simple response',
-          'display_text': 'Displayed simple response'
-        }
-      ]
-    }
-  },
-  {
-    'platform': 'ACTIONS_ON_GOOGLE',
-    'basic_card': {
-      'title': 'Title: this is a title',
-      'subtitle': 'This is an subtitle.',
-      'formatted_text': 'Body text can include unicode characters including emoji 📱.',
-      'image': {
-        'image_uri': 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png'
-      },
-      'buttons': [
-        {
-          'title': 'This is a button',
-          'open_uri_action': {
-            'uri': 'https://assistant.google.com/'
+    else{
+      return res.json({
+        speech: req.body.result.action,
+        displayText: "Unknown Action",
+        source: '/',
+        messages: [
+          {
+            type: 0,
+            speech: "Sorry I don't know that action"
           }
-        }
-      ]
+        ]
+      });
     }
-  },
-  {
-    'platform': 'FACEBOOK',
-    'card': richResponseV2Card
-  },
-  {
-    'platform': 'SLACK',
-    'card': richResponseV2Card
-  }
-];
+
+  });
+
+  var ref=firebase.app().database().ref();
+  ref.once('value').then(function(snap){
+    console.log('snap.val()',snap.val());
+  });
+
+  ref.once('value').then(function(snap){
+    console.log("Address:", snap.child("Alan Turing").child('Address').val());
+  });
+
+server.listen((process.env.PORT || 8000), function () {
+    console.log("Server is up and running...");
+});
+
+
