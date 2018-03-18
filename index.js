@@ -78,6 +78,7 @@ server.post('/', function (req, res) {
     console.log('snap.val()',snap.val());
   });
 
+  
   ref.once('value').then(function(snap){
     console.log("Address:", snap.child("Alan Turing").child('Address').val());
   });
